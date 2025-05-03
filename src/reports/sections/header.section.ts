@@ -16,19 +16,41 @@ const logo: Content = {
 };
 
 export const headerSection = (options: HeaderOptions = {}): Content => {
-  const { showDate = true, showLogo = true, title } = options;
+  const { showDate = true, showLogo = true, title, subtitle } = options;
 
   const headerLogo = showLogo ? logo : null;
   const headerDate: Content = showDate
     ? {
         text: new Date().toLocaleDateString(),
         alignment: 'right',
-        margin: [20, 20],
+        margin: [20, 30],
+        width: 150,
+      }
+    : null;
+
+  const headerSubtitle: Content = subtitle
+    ? {
+        text: subtitle,
+        alignment: 'center',
+        style: { bold: true, fontSize: 22 },
       }
     : null;
 
   const headerTitle: Content = title
-    ? { text: title, style: { alignment: 'center', bold: true } }
+    ? {
+        stack: [
+          {
+            text: title,
+            alignment: 'center',
+            margin: [0, 15, 0, 0],
+            style: {
+              bold: true,
+              fontSize: 26,
+            },
+          },
+          headerSubtitle,
+        ],
+      }
     : null;
 
   return {
